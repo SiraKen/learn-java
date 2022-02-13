@@ -1,0 +1,22 @@
+#!/bin/bash
+case $1 in
+"co")
+  javac $2
+;;
+"cf")
+  filename=$2
+  echo $filename to ${filename//.java/.class} && \
+  javac $2 && \
+  jar cfe ${filename//.java/.jar} ${filename//.java/} ${filename//.java/.class}
+;;
+"run")
+  filename=$2
+  java -jar $filename
+;;
+"cleanup")
+  find . -name "*.class" | xargs rm
+;;
+*)
+  echo Unexptected command.
+;;
+esac
